@@ -56,7 +56,7 @@
                     <li><a href="index.html#process">Process</a></li>
                     <li><a href="index.html#whatInit">What's In it for me</a></li>
                     <li><a href="index.html#team">The team</a></li>
-                    <li><a href="token.html#token" class="active">Token</a></li>
+                    <li><a href="token.html#token" class="active">Search Token</a></li>
 
 
                 </ul>
@@ -120,7 +120,7 @@
                 </div>
                 <div class="wrapper01" id="tokenDetails">
                     <div class="wrapper02">
-                        <img id="mainImage" class="image01">
+                        <img id="mainImage" alt="image-alt" class="image01">
                         <div class="a01">
                             <div>
                                 <div class="a02">
@@ -210,14 +210,14 @@
 
                 <div class="container" id="transferHistory">
                     <div class="table-container">
-                        <table>
+                        <table id="tokenHistory">
                             <tr class="header-row">
                                 <th class="mano01">From</th>
                                 <th class="man">To</th>
                                 <th>Transfer Date</th>
                                 <th>Transfer Time</th>
                             </tr>
-                            <tr class="table01">
+                            <!-- <tr class="table01">
                                 <td class="mano03">
 
                                     <div class="a123">
@@ -245,7 +245,7 @@
                                 </td>
                                 <td id="tranferDate" class="ta01"></td>
                                 <td id="transferDateOnly" class="ta01"></td>
-                            </tr>
+                            </tr> -->
                         </table>
                     </div>
                 </div>
@@ -285,7 +285,7 @@
             <div class="nnn03">
                 <div id="searchResults01" class="tab-content" style="display: block;">
                     <div class="image-container">
-                        <img id="mainImage" alt="Your Image" class="ima01 mt-5 pt-5">
+                        <img id="mainImage" alt="image-alt" class="ima01 mt-5 pt-5">
                     </div>
 
                     <div class="b01">
@@ -350,12 +350,12 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="b03">
 
                         <div class="ran3689">
                             <p class="images">Images</p>
-                            <div  id="fileAttachment" class="image-cont">
+                            <div id="fileAttachment" class="image-cont">
                             </div>
                         </div>
                         <div class="ran3689">
@@ -367,17 +367,16 @@
                             <div id="pdfAttachment" class="la0L"></div>
                         </div>
 
-                    </div> 
+                    </div>
                 </div>
-
-                <div id="transferHistory01" class="tab-content" style="display: none;">
-                    <table class="tablecont">
+                <div id="transferHistory01" class="tab-content" style="display: none;" >
+                    <table id="tokenHistory" class="tablecont" style ="margin-top: auto;" >
                         <tr class="nash">
                             <th class="from">From</th>
                             <th class="to">To</th>
                             <th class="transfer-details">Transfer Details</th>
                         </tr>
-                        <tr class="table36801">
+                        <!-- <tr class="table36801">
                             <td class="rsa01">
                                 <div class="world">
                                     <div>
@@ -386,7 +385,7 @@
                                             <p id="transferCunsumer" class="ind02">Creator</p>
                                         </div>
                                     </div>
-                                    <img id="fromImage" src="./assets/images/ar.png" class="ar01">
+                                    <img id="fromImage" class="ar01">
                                 </div>
                             </td>
 
@@ -402,7 +401,7 @@
                                 <p id="transferDateOnly" class="ind01"></p>
 
                             </td>
-                        </tr>
+                        </tr> -->
 
 
 
@@ -473,6 +472,7 @@
         notoken.style.display = 'block';
         let itemIndex;
         const fetchTokenData = (inputToken) => {
+            resetFileAttachments();
             var myHeaders = new Headers();
             myHeaders.append("Content-Type", "application/json");
 
@@ -485,7 +485,7 @@
                 body: raw,
                 redirect: 'follow'
             };
-            fetch("http://54.183.209.192:4000/smeasset/getGlobalSMEAssetDetails", requestOptions)
+            fetch("https://api.appqedvault.com/smeasset/getGlobalSMEAssetDetails", requestOptions)
                 .then(response => response.json())
                 .then(result => {
                     console.log("ewywiuyri", result?.status)
@@ -515,12 +515,24 @@
                             "toImage",
                             "tranferDate",
                             "transferDateOnly",
-                            "mainImage"
+                            "mainImage",
+                            "tokenHistory"
                         ];
+                        let isNullOrEmptyNew = (s) => {
+
+                            if (s === undefined || s === null || s === '' || s === 'null' || s === 'undefined' || s === '[]')
+                                return true;
+                            else if (s.length === 0)
+                                return true;
+                            else
+                                return false;
+
+                        }
                         elementGroups.forEach((groupId) => {
                             const elements = document.querySelectorAll(`#${groupId}`);
                             if (elements.length > 0) {
                                 elements.forEach((element) => {
+
                                     if (groupId === "tokenCategory") {
                                         element.innerHTML = apiData.category;
                                     } else if (groupId === "tokenItemName") {
@@ -536,40 +548,86 @@
                                     } else if (groupId === "creatorName") {
                                         element.innerHTML = apiData.creatorName;
                                     } else if (groupId === "creatorImage") {
-                                        element.src = apiData.creatorImage;
+                                        element.src = apiData.creatorImage ? apiData.creatorImage : "./assets/images/human.png";
                                     } else if (groupId === "currentOwnerImage") {
-                                        element.src = apiData.ownerImage;
+                                        element.src = apiData.ownerImage ? apiData.ownerImage : "./assets/images/human.png";
                                     } else if (groupId === "mainImage") {
-                                        element.src = apiData?.Attachments[0]?.fileUrl;
-                                    }
-                                    else if (apiData?.transferHistory[0]) {
-                                        if (groupId === "fromName") {
-                                            element.innerHTML = apiData?.transferHistory[0]?.fromName
-                                        } else if (groupId === "toName") {
-                                            element.innerHTML = apiData.transferHistory[0].toName
-                                        } else if (groupId === "toImage") {
-                                            element.src = apiData.transferHistory[0].toImage
 
-                                        } else if (groupId === "fromImage") {
-                                            element.src = apiData.transferHistory[0].fromImage
-
-                                        } else if (groupId === "fromType") {
-                                            element.innerHTML = apiData.transferHistory[0].fromType
-
-                                        } else if (groupId === "toType") {
-                                            element.innerHTML = apiData.transferHistory[0].toType
-
-                                        } else if (groupId === "tranferDate") {
-                                            element.innerHTML = moment(apiData.transferHistory[0].tranferDate).format("DD-MMMM-YYYY")
-
-                                        } else if (groupId === "transferDateOnly") {
-                                            element.innerHTML = moment(apiData.transferHistory[0].transferDateOnly).format("HH:MM a")
-
-                                        }
+                                        element.src = !isNullOrEmptyNew(apiData?.Attachments[0]?.fileUrl) ? apiData?.Attachments[0]?.fileUrl : "./assets/images/Noimage.png";
                                     }
                                 });
                             }
                         });
+
+                        console.log('inside', apiData?.transferHistory);
+                        const transferHistoryElement = [
+                            "tokenHistory"
+                        ];
+                        const transferHistoryNoRecordElement = [
+                            "tokenHistory",
+                            "transferHistory01"
+                        ];
+                        let transferData = "";
+                        const setNoDataFound = () => {
+                            transferHistoryNoRecordElement.forEach((groupId) => {
+                                const elements = document.querySelectorAll(`#${groupId}`);
+
+                                if (elements.length > 0) {
+                                    elements.forEach((element) => {
+                                        element.style = "text-align:center;";
+                                        element.innerHTML = "No Details Found";
+                                    });
+                                }
+                            });
+                        }
+                        console.log(isNullOrEmptyNew(apiData?.transferHistory), apiData?.transferHistory)
+                        !isNullOrEmptyNew(apiData?.transferHistory) ? apiData?.transferHistory.map((item) => {
+                            console.log("moye moye", item);
+
+                            transferData = `<tr class="table01">
+                                                <td class="mano03">
+
+                                                    <div class="a123">
+                                                        <img id="fromImage" class="image07"
+                                                        src="${!isNullOrEmptyNew(item?.fromImage) ? item?.fromImage : "./assets/images/human.png"}">
+                                                        <div class="a05">
+                                                            <h6 id="fromName" class="name03">${item?.fromName}</h6>
+                                                            <div class="vvv">
+                                                                <h6 id="fromType" class="mini-name">QED Business</h6>
+                                                            </div>
+                                                        </div>
+                                                        <img src="./assets/images/apg14.png" class="image368" data-dark="./assets/images/apg14.png">
+                                                    </div>
+                                                </td>
+
+                                                <td>
+                                                    <div class="a123 a222">
+                                                        <img id="toImage" class="image03" src="${!isNullOrEmptyNew(item?.toImage) ? item?.toImage : "./assets/images/human.png"}">
+                                                        <div class="a05">
+                                                            <h6 id="toName" class="name03">${item?.toName}</h6>
+                                                            <div class="vvv01">
+                                                                <h6 id="toType" class="mini-name">QED Consumer</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td id="tranferDate" class="ta01">
+                                                    ${moment(item?.tranferDate).format("DD-MMMM-YYYY")}</td>
+                                                <td id="transferDateOnly" class="ta01">${moment(item?.tranferDate).format("HH:MM a")}</td>
+                                            </tr>
+                                            `;
+
+                            transferHistoryElement.forEach((groupId) => {
+                                const elements = document.querySelectorAll(`#${groupId}`);
+
+                                if (elements.length > 0) {
+                                    elements.forEach((element) => {
+                                        element.innerHTML += transferData;
+                                    });
+                                }
+                            });
+                        }) : setNoDataFound()
+
                         fileAttachmentData()
                     }
                     else {
@@ -600,13 +658,11 @@
                 redirect: 'follow'
             };
 
-            fetch("http://54.183.209.192:4000/smeasset/listGLobalAttachments", requestOptions)
+            fetch("https://api.appqedvault.com/smeasset/listGLobalAttachments", requestOptions)
                 .then(response => response.json())
                 .then(result => {
                     let fileApi = result?.response?.data
                     console.log("68876", fileApi.length)
-                    // let pdfAttachment = document.getElementById("pdfAttachment")
-                    // let fileAttachment = document.getElementById("fileAttachment")
                     const elementGroups = [
                         "pdfAttachment",
                         "fileAttachment"
@@ -641,11 +697,37 @@
                                 });
                             }
                         });
-                        // pdfAttachment.innerHTML += pdfData;
-                        // fileAttachment.innerHTML += fileData
                     })
                 })
                 .catch(error => console.log('error', error));
+        }
+        const resetFileAttachments = () => {
+            const elementGroups = [
+                "pdfAttachment",
+                "fileAttachment",
+                "tokenHistory"
+            ];
+
+            elementGroups.forEach((groupId) => {
+                const elements = document.querySelectorAll(`#${groupId}`);
+
+                if (elements.length > 0) {
+                    elements.forEach((element) => {
+                        if (groupId === "pdfAttachment") {
+                            element.innerHTML = '';
+                        } else if (groupId === "fileAttachment") {
+                            element.innerHTML = '';
+                        } else if (groupId === "tokenHistory") {
+                            element.innerHTML = `<tr class="header-row">
+                                <th class="mano01">From</th>
+                                <th class="man">To</th>
+                                <th>Transfer Date</th>
+                                <th>Transfer Time</th>
+                            </tr>`;
+                        }
+                    });
+                }
+            });
         }
 
         searchButton.addEventListener('click', function () {
