@@ -552,14 +552,12 @@
                                     } else if (groupId === "currentOwnerImage") {
                                         element.src = apiData.ownerImage ? apiData.ownerImage : "./assets/images/human.png";
                                     } else if (groupId === "mainImage") {
-
-                                        element.src = !isNullOrEmptyNew(apiData?.Attachments[0]?.fileUrl) ? apiData?.Attachments[0]?.fileUrl : "./assets/images/Noimage.png";
+                                        element.src = !isNullOrEmptyNew(apiData?.Attachments[0]?.fileUrl) ? apiData?.Attachments[0]?.fileUrl : "./assets/images/NoImage.png";
                                     }
                                 });
                             }
                         });
-
-                        console.log('inside', apiData?.transferHistory);
+                       
                         const transferHistoryElement = [
                             "tokenHistory"
                         ];
@@ -777,7 +775,6 @@
                 // a.style.display = "none";
             }
         });
-
         function setActiveTabButton(buttonId) {
             const buttons = document.querySelectorAll('button');
 
@@ -789,9 +786,6 @@
                 }
             });
         }
-
-
-
         function showTokenDetails() {
             document.getElementById('tokenDetails').style.display = 'block';
             document.getElementById('transferHistory').style.display = 'none';
