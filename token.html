@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en" class="lightTheme">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QED Home page</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="assets/css/slick.css" />
+    <link rel="stylesheet" href="assets/css/normalize.css">
+    <link rel="stylesheet" href="assets/css/base.css?ver=8">
+    <link rel="stylesheet" href="index.css">
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/moment.min.js">
+    </script>
+    <script src="https://kit.fontawesome.com/021c70449c.js" crossorigin="anonymous"></script>
+
+
+
+
+</head>
+
+<body>
+
+    <div class="loader">
+        <div class="flex">
+            <video id="loaderVideo" height="auto" autoplay="" muted="" playsinline="">
+                <source data-light="assets/images/Light_screen_logo.mp4" src="assets/images/Dark_screen_logo.mp4">
+                <p class="warning">Your browser does not support HTML5 video.</p>
+            </video>
+
+        </div>
+    </div>
+    <!-- header started  -->
+    <header class="topHeader">
+        <div class="navContainer">
+            <div class="logo">
+                <div id="nav-icon3" class="">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <a href="#"><img loading="lazy" data-light="assets/images/light-logo.svg"
+                        src="assets/images/dark-logo.svg" alt=""></a>
+            </div>
+
+
+            <nav>
+                <ul class="nav">
+                    <li><a href="index.html#home">Home</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="index.html#process">Process</a></li>
+                    <li><a href="index.html#whatInit">What's In it for me</a></li>
+                    <li><a href="index.html#team">The team</a></li>
+                    <li><a href="token.html#token" class="active">Token</a></li>
+
+
+                </ul>
+                <span class="menuPointer" style="left: 514.675px !important;"></span>
+            </nav>
+
+            <div class="rightNav">
+                <ul class="actionLink">
+                    <li><a href="#contact" class="button primary contact">Contact Us</a></li>
+                    <li>
+                        <span class="mode">
+                            <img loading="lazy" data-light="assets/images/moon.svg" src="assets/images/Sun.svg" alt="">
+                        </span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+    <!-- header end  -->
+
+
+    <!-- home slider start -->
+
+
+    <!-- home slider end -->
+
+
+
+
+    <div id="token">
+
+        <div class="highhidden">
+            <div class="bg-container01">
+                <h1 class="heading01">Search Token <span class="span01">at one go!</span></h1>
+
+                <div class="container01">
+                    <div class="input-box">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" class="input01" id="searchInput" value="" placeholder="Enter Token ID">
+                        <button type="submit" class="button" id="searchButton">Search</button>
+                    </div>
+                </div>
+            </div>
+            <div id="notokenfound">
+                <div class="container121">
+                    <div class="container122">
+                        <h3 class="tockenavai">No Tokens Available</h3>
+                        <img src="./assets/images/layer08.png" class="layer01">
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="bg-container02" id="searchResults">
+                <div class="wrapper">
+                    <button class="button01" id="tokenDetailsButton">Token Details</button>
+                    <button class="button02" id="transferHistoryButton">Transfer History</button>
+                </div>
+                <div>
+                </div>
+                <div class="wrapper01" id="tokenDetails">
+                    <div class="wrapper02">
+                        <img id="mainImage" class="image01">
+                        <div class="a01">
+                            <div>
+                                <div class="a02">
+                                    <div class="random">
+                                        <div class="a03">
+                                            <img src="./assets/images/apg04.png" class="image02">
+                                            <h6 class="name01">Category</h6>
+                                        </div>
+                                        <h2 id="tokenCategory" class="name02 classForCat"></h2>
+                                    </div>
+                                    <div class="random">
+                                        <div class="a03">
+                                            <img src="./assets/images/apg05.png" class="image02">
+                                            <h6 class="name01">Item Name</h6>
+                                        </div>
+                                        <h2 id="tokenItemName" class="name02"></h2>
+                                    </div>
+                                    <div class="random">
+                                        <div class="a03">
+                                            <img src="./assets/images/apg06.png" class="image02">
+                                            <h6 class="name01">Serial No.</h6>
+                                        </div>
+                                        <h2 id="tokenSerialNum" class="name02"></h2>
+                                    </div>
+                                    <div class="random">
+                                        <div class="a03">
+                                            <img src="./assets/images/apg07.png" class="image02">
+                                            <h6 class="name01">Token ID</h6>
+                                        </div>
+                                        <h2 id="tokenId" class="name02"></h2>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="line01">
+                            <div>
+                                <div class="a03 a04">
+                                    <div class="a03 random01">
+                                        <img id="currentOwnerImage" class="image03">
+                                        <div class="a05">
+                                            <h6 id="currentOwnerName" class="name03"></h6>
+                                            <div class="vvv">
+                                                <h6 class="mini-name">Current owners</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="a03">
+                                        <img id="creatorImage" class="image03">
+                                        <div class="a05">
+                                            <h6 id="creatorName" class="name03"></h6>
+                                            <div class="vvv01">
+                                                <h6 class="mini-name">Creator</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="a03 a06">
+                                    <div class="ma01">
+                                        <h6 class="desc01">Description</h6>
+                                        <p id="tokenDes" class="para368">
+                                        </p>
+                                    </div>
+                                    <div class="token-image">
+
+                                        <div>
+                                            <h6 class="desc01">Images</h6>
+                                        </div>
+                                        <div id="fileAttachment" class="ma02">
+                                        </div>
+                                    </div>
+                                    <div class="token-pdf">
+                                        <div>
+                                            <h6 class="desc01">Attachments</h6>
+                                        </div>
+                                        <div id="pdfAttachment" class="la0L">
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container" id="transferHistory">
+                    <div class="table-container">
+                        <table>
+                            <tr class="header-row">
+                                <th class="mano01">From</th>
+                                <th class="man">To</th>
+                                <th>Transfer Date</th>
+                                <th>Transfer Time</th>
+                            </tr>
+                            <tr class="table01">
+                                <td class="mano03">
+
+                                    <div class="a123">
+                                        <img id="fromImage" class="image07">
+                                        <div class="a05">
+                                            <h6 id="fromName" class="name03"></h6>
+                                            <div class="vvv">
+                                                <h6 id="fromType" class="mini-name"></h6>
+                                            </div>
+                                        </div>
+                                        <img src="./assets/images/apg14.png" class="image368">
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div class="a123 a222">
+                                        <img id="toImage" class="image03">
+                                        <div class="a05">
+                                            <h6 id="toName" class="name03"></h6>
+                                            <div class="vvv01">
+                                                <h6 id="toType" class="mini-name"></h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td id="tranferDate" class="ta01"></td>
+                                <td id="transferDateOnly" class="ta01"></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="high-hidden01">
+        <div class="bg-cont01">
+            <h1 class="heading001">Search Token <span class="span001">at one go!</span></h1>
+        </div>
+        <div class="container02">
+            <div class="input-box01">
+                <i class="fa-solid fa-magnifying-glass  nna02" id="searchInput02"></i>
+                <input type="text" class="input02" id="searchInput01" placeholder="Enter Token ID">
+            </div>
+        </div>
+
+
+        <div class="container368" id="bb02">
+            <div class="container369">
+                <h4 class="tokenavail01">No Tokens Available</h4>
+                <img src="./assets/images/layer08.png" class="layer02">
+            </div>
+        </div>
+
+
+        <div id="man02" style="display: none">
+            <div class="wrapper001 wrapper368">
+                <button class="button20" id="tokenDetailsButton01">Token Details</button>
+                <button class="button21" id="transferHistoryButton01">Transfer History</button>
+            </div>
+
+
+
+            <div class="nnn03">
+                <div id="searchResults01" class="tab-content" style="display: block;">
+                    <div class="image-container">
+                        <img id="mainImage" alt="Your Image" class="ima01 mt-5 pt-5">
+                    </div>
+
+                    <div class="b01">
+
+                        <div class="ran368">
+                            <div class="b02">
+                                <img src="./assets/images/apg04.png" class="i01">
+                                <h6 class="cata">Category</h6>
+                            </div>
+                            <h4 id="tokenCategory" class="car classForCat"></h4>
+                        </div>
+                        <div class="ran368">
+                            <div class="b02">
+                                <img src="./assets/images/apg05.png" class="i01">
+                                <h6 class="cata">Item Name</h6>
+                            </div>
+                            <h4 id="tokenItemName" class="car"></h4>
+                        </div>
+                        <div class="ran368">
+                            <div class="b02">
+                                <img src="./assets/images/apg06.png" class="i01">
+                                <h6 class="cata">Serial No.</h6>
+                            </div>
+                            <h4 id='tokenSerialNum' class="car"></h4>
+                        </div>
+                        <div class="ran368">
+                            <div class="b02">
+                                <img src="./assets/images/apg07.png" class="i01">
+                                <h6 class="cata">Token ID</h6>
+                            </div>
+                            <h4 id="tokenId" class="car"></h4>
+                        </div>
+                    </div>
+
+
+
+                    <div class="b03">
+                        <div>
+                            <div class="ran3689">
+                                <div class="b04">
+                                    <img id="currentOwnerImage" class="image03">
+                                    <div class="pale">
+                                        <h5 id="currentOwnerName" class="nam"></h5>
+                                        <div class="canna">
+                                            <p class="Current">Current Owners</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="ran3689">
+                                <div class="b04">
+                                    <img id="creatorImage" class="image03">
+                                    <div class="pale">
+                                        <h5 id="creatorName" class="nam"></h5>
+                                        <div class="canna">
+                                            <p class="Current">Creator</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="b03">
+
+                        <div class="ran3689">
+                            <p class="images">Images</p>
+                            <div  id="fileAttachment" class="image-cont">
+                            </div>
+                        </div>
+                        <div class="ran3689">
+                            <p class="images01">Description</p>
+                            <p id="tokenDes" class="manam">. </p>
+                        </div>
+                        <div class="ran3689">
+                            <p class="images">Attachments</p>
+                            <div id="pdfAttachment" class="la0L"></div>
+                        </div>
+
+                    </div> 
+                </div>
+
+                <div id="transferHistory01" class="tab-content" style="display: none;">
+                    <table class="tablecont">
+                        <tr class="nash">
+                            <th class="from">From</th>
+                            <th class="to">To</th>
+                            <th class="transfer-details">Transfer Details</th>
+                        </tr>
+                        <tr class="table36801">
+                            <td class="rsa01">
+                                <div class="world">
+                                    <div>
+                                        <p id="fromName" class="ind01">Deepak QED</p>
+                                        <div class="dummy-bg">
+                                            <p id="transferCunsumer" class="ind02">Creator</p>
+                                        </div>
+                                    </div>
+                                    <img id="fromImage" src="./assets/images/ar.png" class="ar01">
+                                </div>
+                            </td>
+
+                            <td class="rsa02">
+                                <img id="toImage" class="image03">
+                                <p id="toName" class="ind01"></p>
+                                <div class="dummy-bg01">
+                                    <p id="tranferCreator" class="ind02"></p>
+                                </div>
+                            </td>
+                            <td class="rsa03">
+                                <p id="tranferDate" class="ind01"></p>
+                                <p id="transferDateOnly" class="ind01"></p>
+
+                            </td>
+                        </tr>
+
+
+
+
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <div class="row-flex">
+                <div class="col span_4 footer-logo">
+                    <img loading="lazy" data-light="assets/images/light-logo-footer.svg"
+                        src="assets/images/logo-footer.svg" alt="">
+                </div>
+                <div class="col span_12">
+
+                    <div class="row-flex align-bottom">
+
+
+                        <div class="col span_12">
+
+                            <ul class="footerLinks">
+                                <li><a href="#home" class="active">Home</a></li>
+                                <li><a href="#about">About</a></li>
+                                <li><a href="#process">Process</a></li>
+                                <li><a href="#whatInit">What's In it for me</a></li>
+                                <li><a href="#team">The team</a></li>
+                            </ul>
+                        </div>
+                        <div class="col span_4">
+                            <p>© 2022 QED</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </footer>
+
+    <!-- main content started  -->
+    <div class="main">
+
+
+    </div>
+    <!-- main content end  -->
+
+
+    <script src="assets/js/jquery.min.js"></script>
+    <script type="text/javascript" src="assets/js/slick.min.js"></script>
+    <script src="assets/js/custom.js?ver=7"></script>
+
+    <script>
+
+
+        // Get references to the elements
+        const searchInput = document.getElementById('searchInput');
+        const searchButton = document.getElementById('searchButton');
+        const searchResults = document.getElementById('searchResults');
+        const notoken = document.getElementById('notokenfound')
+
+
+
+        searchResults.style.display = 'none';
+        notoken.style.display = 'block';
+        let itemIndex;
+        const fetchTokenData = (inputToken) => {
+            var myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json");
+
+            var raw = JSON.stringify({
+                "tokenId": inputToken
+            });
+            var requestOptions = {
+                method: 'POST',
+                headers: myHeaders,
+                body: raw,
+                redirect: 'follow'
+            };
+            fetch("http://54.183.209.192:4000/smeasset/getGlobalSMEAssetDetails", requestOptions)
+                .then(response => response.json())
+                .then(result => {
+                    console.log("ewywiuyri", result?.status)
+
+                    if (result?.status === "SUCCESS") {
+                        searchResults.style.display = 'block';
+                        notoken.style.display = 'none';
+                        let apiData = result?.response?.data
+                        indexData = result?.response?.data?.itemIndex
+                        console.log("tokenCategory :: ", tokenCategory)
+                        const elementGroups = [
+                            "tokenCategory",
+                            "tokenItemName",
+                            "tokenSerialNum",
+                            "tokenId",
+                            "tokenDes",
+                            "creatorName",
+                            "currentOwnerName",
+                            "creatorImage",
+                            "ownerImage",
+                            "fromName",
+                            "fromType",
+                            "currentOwnerImage",
+                            "toName",
+                            "toType",
+                            "fromImage",
+                            "toImage",
+                            "tranferDate",
+                            "transferDateOnly",
+                            "mainImage"
+                        ];
+                        elementGroups.forEach((groupId) => {
+                            const elements = document.querySelectorAll(`#${groupId}`);
+                            if (elements.length > 0) {
+                                elements.forEach((element) => {
+                                    if (groupId === "tokenCategory") {
+                                        element.innerHTML = apiData.category;
+                                    } else if (groupId === "tokenItemName") {
+                                        element.innerHTML = apiData.itemName;
+                                    } else if (groupId === "tokenSerialNum") {
+                                        element.innerHTML = apiData.serialNo;
+                                    } else if (groupId === "tokenId") {
+                                        element.innerHTML = apiData.tokenId;
+                                    } else if (groupId === "tokenDes") {
+                                        element.innerHTML = apiData.description;
+                                    } else if (groupId === "currentOwnerName") {
+                                        element.innerHTML = apiData.ownerName;
+                                    } else if (groupId === "creatorName") {
+                                        element.innerHTML = apiData.creatorName;
+                                    } else if (groupId === "creatorImage") {
+                                        element.src = apiData.creatorImage;
+                                    } else if (groupId === "currentOwnerImage") {
+                                        element.src = apiData.ownerImage;
+                                    } else if (groupId === "mainImage") {
+                                        element.src = apiData?.Attachments[0]?.fileUrl;
+                                    }
+                                    else if (apiData?.transferHistory[0]) {
+                                        if (groupId === "fromName") {
+                                            element.innerHTML = apiData?.transferHistory[0]?.fromName
+                                        } else if (groupId === "toName") {
+                                            element.innerHTML = apiData.transferHistory[0].toName
+                                        } else if (groupId === "toImage") {
+                                            element.src = apiData.transferHistory[0].toImage
+
+                                        } else if (groupId === "fromImage") {
+                                            element.src = apiData.transferHistory[0].fromImage
+
+                                        } else if (groupId === "fromType") {
+                                            element.innerHTML = apiData.transferHistory[0].fromType
+
+                                        } else if (groupId === "toType") {
+                                            element.innerHTML = apiData.transferHistory[0].toType
+
+                                        } else if (groupId === "tranferDate") {
+                                            element.innerHTML = moment(apiData.transferHistory[0].tranferDate).format("DD-MMMM-YYYY")
+
+                                        } else if (groupId === "transferDateOnly") {
+                                            element.innerHTML = moment(apiData.transferHistory[0].transferDateOnly).format("HH:MM a")
+
+                                        }
+                                    }
+                                });
+                            }
+                        });
+                        fileAttachmentData()
+                    }
+                    else {
+                        searchResults.style.display = 'none';
+                        notoken.style.display = 'block';
+                    }
+
+
+                })
+                .catch(error => console.log('error', error));
+
+        }
+
+        const fileAttachmentData = () => {
+
+            var myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json");
+
+            var raw = JSON.stringify({
+                "itemIndex": indexData,
+                "fileType": ""
+            });
+            console.log("okkkk", indexData)
+            var requestOptions = {
+                method: 'POST',
+                headers: myHeaders,
+                body: raw,
+                redirect: 'follow'
+            };
+
+            fetch("http://54.183.209.192:4000/smeasset/listGLobalAttachments", requestOptions)
+                .then(response => response.json())
+                .then(result => {
+                    let fileApi = result?.response?.data
+                    console.log("68876", fileApi.length)
+                    // let pdfAttachment = document.getElementById("pdfAttachment")
+                    // let fileAttachment = document.getElementById("fileAttachment")
+                    const elementGroups = [
+                        "pdfAttachment",
+                        "fileAttachment"
+                    ];
+                    let pdfData = "";
+                    let fileData = "";
+
+                    fileApi.map(data => {
+                        console.log("inside");
+                        if (data?.fileType === "attachments") {
+                            pdfData = `<div class="a03 a07">
+                                <img src="./assets/images/apg13.png" class="image05">
+                                <p class="pa02">${data.fileName}</p>
+                            </div>
+                            `;
+                        } else {
+                            fileData = `  <div class="gallery">
+                                            <span><img id="file" src=${data.fileUrl} class="image04"></span>
+                                        </div>`
+                        }
+
+                        elementGroups.forEach((groupId) => {
+                            const elements = document.querySelectorAll(`#${groupId}`);
+
+                            if (elements.length > 0) {
+                                elements.forEach((element) => {
+                                    if (groupId === "pdfAttachment") {
+                                        element.innerHTML += pdfData;
+                                    } else if (groupId === "fileAttachment") {
+                                        element.innerHTML += fileData
+                                    }
+                                });
+                            }
+                        });
+                        // pdfAttachment.innerHTML += pdfData;
+                        // fileAttachment.innerHTML += fileData
+                    })
+                })
+                .catch(error => console.log('error', error));
+        }
+
+        searchButton.addEventListener('click', function () {
+            // Get the value from the input
+            const inputValue = searchInput.value;
+
+
+
+            // Check if the input is not empty
+            if (inputValue.trim() !== '') {
+                // Change the styles of the input-box
+
+                searchInput.style.border = '1px solid #005DFF';
+                searchInput.style.borderColor = '#005DFF';
+
+                // Change the styles of the "Search" button
+                searchButton.style.backgroundColor = '#005DFF';
+                searchButton.style.color = '#fff';
+
+                // Show the search results content
+                //searchResults.style.display = 'block';
+            }
+
+            fetchTokenData(inputValue);
+
+        });
+
+
+        // Add a click event listener to the "Search" button
+        searchButton.addEventListener('click', function () {
+            // Get the value from the input
+            const inputValue = searchInput.value;
+
+            // Check if the input is not empty
+            if (inputValue.trim() !== '') {
+                // Change the styles of the input-box
+
+                searchInput.style.border = '1px solid #005DFF';
+                searchInput.style.borderColor = '#005DFF';
+
+                // Change the styles of the "Search" button
+                searchButton.style.backgroundColor = '#005DFF';
+                searchButton.style.color = '#fff';
+
+                // Show the search results content
+                //searchResults.style.display = 'block';
+                // a.style.display = "none";
+            }
+        });
+
+        function setActiveTabButton(buttonId) {
+            const buttons = document.querySelectorAll('button');
+
+            buttons.forEach(button => {
+                if (button.id === buttonId) {
+                    button.classList.add('button368');
+                } else {
+                    button.classList.remove('button368');
+                }
+            });
+        }
+
+
+
+        function showTokenDetails() {
+            document.getElementById('tokenDetails').style.display = 'block';
+            document.getElementById('transferHistory').style.display = 'none';
+            setActiveTabButton('tokenDetailsButton');
+        }
+
+        // Function to show the Transfer History content
+        function showTransferHistory() {
+            document.getElementById('tokenDetails').style.display = 'none';
+            document.getElementById('transferHistory').style.display = 'block';
+            setActiveTabButton('transferHistoryButton');
+        }
+
+        // Set the initial content based on user preference or default to Token Details
+        const userPreference = localStorage.getItem('tabPreference');
+        if (userPreference === 'transferHistory') {
+            showTransferHistory();
+        } else {
+            showTokenDetails();
+        }
+
+        // Add event listeners to the buttons
+        document.getElementById('tokenDetailsButton').addEventListener('click', function () {
+            showTokenDetails();
+            // Store user preference in local storage
+            localStorage.setItem('tabPreference', 'tokenDetails');
+        });
+
+        document.getElementById('transferHistoryButton').addEventListener('click', function () {
+            showTransferHistory();
+            // Store user preference in local storage
+            localStorage.setItem('tabPreference', 'transferHistory');
+        });
+
+        const searctMegnifi = document.getElementById("searchInput02")
+        const searchInputfieldValue = document.getElementById("searchInput01")
+        searctMegnifi.addEventListener('click', function () {
+            var man02 = document.getElementById('man02');
+            const b = document.getElementById("bb02");
+            let searchField = searchInputfieldValue.value
+            fetchTokenData(searchField)
+            console.log("573217", searchInputfieldValue.value)
+            b.style.display = "none";
+
+
+            if (man02.style.display === 'none') {
+                man02.style.display = 'block';
+            } else {
+                man02.style.display = 'none';
+            }
+        });
+
+        const tokenDetailsButton01 = document.getElementById('tokenDetailsButton01');
+        const transferHistoryButton01 = document.getElementById('transferHistoryButton01');
+
+        const tokenDetailsContent01 = document.getElementById('searchResults01');
+        const transferHistoryContent01 = document.getElementById('transferHistory01');
+
+
+
+
+        tokenDetailsButton01.addEventListener('click', () => {
+            tokenDetailsContent01.style.display = 'block';
+            transferHistoryContent01.style.display = 'none';
+
+            if (tokenDetailsContent01.style.display === 'block' || document.getElementById('searchResults01').style.display === 'block') {
+                tokenDetailsButton01.classList.add('button375');
+                transferHistoryButton01.classList.remove('button375');
+            }
+        });
+
+        transferHistoryButton01.addEventListener('click', () => {
+            tokenDetailsContent01.style.display = 'none';
+            transferHistoryContent01.style.display = 'block';
+
+            if (transferHistoryContent01.style.display === 'block' || document.getElementById('transferHistory01').style.display === 'block') {
+                transferHistoryButton01.classList.add('button375');
+                tokenDetailsButton01.classList.remove('button375');
+            }
+        });
+    </script>
+</body>
+
+</html>
