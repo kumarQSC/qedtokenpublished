@@ -95,8 +95,8 @@
                 <div class="container01">
                     <div class="input-box">
                         <i class="fa-solid fa-magnifying-glass"></i>
-                        <input type="text" class="input01" id="searchInput" value="" placeholder="Enter Token ID">
-                        <button type="submit" class="button" id="searchButton">Search</button>
+                        <input type="text" class="input01" id="searchInput" value="" placeholder="Enter Token ID" onkeyup="changeColor(this.value)">
+                        <button type="submit" class="button" id="searchButton" >Search</button>
                     </div>
                 </div>
             </div>
@@ -467,6 +467,13 @@
             };
         }
 
+        function changeColor(val) {
+            
+            if (val.trim())
+                searchButton.style.backgroundColor = "#005eff"
+            else
+                searchButton.style.backgroundColor = "#C5D2D7"
+        }
         // Get references to the elements
         const searchInput = document.getElementById('searchInput');
         const searchButton = document.getElementById('searchButton');
@@ -500,9 +507,9 @@
             };
             searchButton.disabled = true;
             // development
-            fetch("http://54.183.209.192:4000/smeasset/getGlobalSMEAssetDetails", requestOptions)
-                // live 
-                // fetch("https://api.appqedvault.com/smeasset/getGlobalSMEAssetDetails", requestOptions)
+            <!-- fetch("http://54.183.209.192:4000/smeasset/getGlobalSMEAssetDetails", requestOptions) -->
+            // live 
+            fetch("https://api.appqedvault.com/smeasset/getGlobalSMEAssetDetails", requestOptions)
                 .then(response => response.json())
                 .then(result => {
                     console.log("ewywiuyri", result?.status)
@@ -711,11 +718,11 @@
                 redirect: 'follow'
             };
             // development
-            fetch("http://54.183.209.192:4000/smeasset/listGLobalAttachments", requestOptions)
+            //fetch("http://54.183.209.192:4000/smeasset/listGLobalAttachments", requestOptions)
 
 
                 // live 
-                // fetch("https://api.appqedvault.com/smeasset/listGLobalAttachments", requestOptions)
+                 fetch("https://api.appqedvault.com/smeasset/listGLobalAttachments", requestOptions)
                 .then(response => response.json())
                 .then(result => {
                     let fileApi = result?.response?.data
