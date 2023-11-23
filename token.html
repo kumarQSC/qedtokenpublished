@@ -876,11 +876,11 @@
                 searchButton.style.backgroundColor = '#005DFF';
                 searchButton.style.color = '#fff';
 
-
+         
 
                 // Show the search results content
                 //searchResults.style.display = 'block';
-                debounceFetchTokenApi(inputValue);
+                debounceFetchTokenApi(inputValue.trim());
             } else {
                 // If the input is empty, disable the search button
                 searchButton.disabled = false;
@@ -969,7 +969,7 @@
             const b = document.getElementById("bb02");
 
             let searchField = searchInputfieldValue.value
-            debounceFetchTokenApi(searchField);
+            debounceFetchTokenApi(searchField.trim());
             b.style.display = "none";
 
 
