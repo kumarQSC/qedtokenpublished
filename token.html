@@ -102,7 +102,7 @@
             </div>
             <div id="notokenfound">
                 <div class="container121">
-                    <div class="container122">
+                    <div class="container122" id="notokendata" style="display: none;">
                         <h3 class="tockenavai">No Tokens Available</h3>
                         <img src="./assets/images/layer08.png" class="layer01">
                     </div>
@@ -162,7 +162,7 @@
                                         <div class="a05">
                                             <h6 id="currentOwnerName" class="name03"></h6>
                                             <div class="vvv">
-                                                <h6 class="mini-name">Current owners</h6>
+                                                <h6 class="mini-name">Current owner</h6>
                                             </div>
                                         </div>
                                     </div>
@@ -210,7 +210,7 @@
 
                 <div class="container" id="transferHistory">
                     <div class="table-container">
-                        <table id="tokenHistory">
+                        <table id="tokenHistory01">
                             <tr class="header-row">
                                 <th class="mano01">From</th>
                                 <th class="man">To</th>
@@ -369,8 +369,8 @@
 
                     </div>
                 </div>
-                <div id="transferHistory01" class="tab-content" style="display: none;" >
-                    <table id="tokenHistory" class="tablecont" style ="margin-top: auto;" >
+                <div id="transferHistory01" class="tab-content" style="display: none;">
+                    <table id="tokenHistory" class="tablecont" style="margin-top: auto;">
                         <tr class="nash">
                             <th class="from">From</th>
                             <th class="to">To</th>
@@ -465,6 +465,8 @@
         const searchButton = document.getElementById('searchButton');
         const searchResults = document.getElementById('searchResults');
         const notoken = document.getElementById('notokenfound')
+        const notokendata = document.getElementById('notokendata')
+        
 
 
 
@@ -485,7 +487,11 @@
                 body: raw,
                 redirect: 'follow'
             };
-            fetch("https://api.appqedvault.com/smeasset/getGlobalSMEAssetDetails", requestOptions)
+            searchButton.disabled = true;
+            // development
+            fetch("http://54.183.209.192:4000/smeasset/getGlobalSMEAssetDetails", requestOptions)
+        // live 
+            // fetch("https://api.appqedvault.com/smeasset/getGlobalSMEAssetDetails", requestOptions)
                 .then(response => response.json())
                 .then(result => {
                     console.log("ewywiuyri", result?.status)
@@ -516,10 +522,10 @@
                             "tranferDate",
                             "transferDateOnly",
                             "mainImage",
-                            "tokenHistory"
+                            "tokenHistory",
+                            "tokenHistory01"
                         ];
                         let isNullOrEmptyNew = (s) => {
-
                             if (s === undefined || s === null || s === '' || s === 'null' || s === 'undefined' || s === '[]')
                                 return true;
                             else if (s.length === 0)
@@ -557,12 +563,14 @@
                                 });
                             }
                         });
-                       
+
                         const transferHistoryElement = [
-                            "tokenHistory"
+                            "tokenHistory",
+                            "tokenHistory01"
                         ];
                         const transferHistoryNoRecordElement = [
                             "tokenHistory",
+                            "tokenHistory01",
                             "transferHistory01"
                         ];
                         let transferData = "";
@@ -591,7 +599,7 @@
                                                         <div class="a05">
                                                             <h6 id="fromName" class="name03">${item?.fromName}</h6>
                                                             <div class="vvv">
-                                                                <h6 id="fromType" class="mini-name">QED Business</h6>
+                                                                <h6 id="fromType" class="mini-name">${item?.fromType}</h6>
                                                             </div>
                                                         </div>
                                                         <img src="./assets/images/apg14.png" class="image368" data-dark="./assets/images/apg14.png">
@@ -604,7 +612,7 @@
                                                         <div class="a05">
                                                             <h6 id="toName" class="name03">${item?.toName}</h6>
                                                             <div class="vvv01">
-                                                                <h6 id="toType" class="mini-name">QED Consumer</h6>
+                                                                <h6 id="toType" class="mini-name">${item?.toType}</h6>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -631,11 +639,15 @@
                     else {
                         searchResults.style.display = 'none';
                         notoken.style.display = 'block';
+                        notokendata.style.display = 'block';
+                        searchButton.disabled = false;
                     }
-
+                    
 
                 })
                 .catch(error => console.log('error', error));
+
+
 
         }
 
@@ -655,8 +667,12 @@
                 body: raw,
                 redirect: 'follow'
             };
+   // development
+            fetch("http://54.183.209.192:4000/smeasset/listGLobalAttachments", requestOptions)
 
-            fetch("https://api.appqedvault.com/smeasset/listGLobalAttachments", requestOptions)
+                     
+        // live 
+            // fetch("https://api.appqedvault.com/smeasset/listGLobalAttachments", requestOptions)
                 .then(response => response.json())
                 .then(result => {
                     let fileApi = result?.response?.data
@@ -667,7 +683,7 @@
                     ];
                     let pdfData = "";
                     let fileData = "";
-
+                    searchButton.disabled = false;
                     fileApi.map(data => {
                         console.log("inside");
                         if (data?.fileType === "attachments") {
@@ -715,13 +731,19 @@
                             element.innerHTML = '';
                         } else if (groupId === "fileAttachment") {
                             element.innerHTML = '';
-                        } else if (groupId === "tokenHistory") {
+                        } else if (groupId === "tokenHistory01") {
                             element.innerHTML = `<tr class="header-row">
                                 <th class="mano01">From</th>
                                 <th class="man">To</th>
                                 <th>Transfer Date</th>
                                 <th>Transfer Time</th>
                             </tr>`;
+                        } else if (groupId === "tokenHistory") {
+                            element.innerHTML = `   <tr class="nash">
+                            <th class="from">From</th>
+                            <th class="to">To</th>
+                            <th class="transfer-details">Transfer Details</th>
+                        </tr>`;
                         }
                     });
                 }
@@ -745,15 +767,27 @@
                 searchButton.style.backgroundColor = '#005DFF';
                 searchButton.style.color = '#fff';
 
+                
+
                 // Show the search results content
                 //searchResults.style.display = 'block';
+
+                fetchTokenData(inputValue);
+            } else {
+                // If the input is empty, disable the search button
+                searchButton.disabled = false;
+
+                // Optionally, you can also reset styles or handle other actions here
+                searchInput.style.border = '1px solid #ccc';
+                searchInput.style.borderColor = '#ccc';
+                
+                searchButton.style.backgroundColor = '#ccc';
+                searchButton.style.color = '#000';
+
+                // Hide the search results content or perform other actions
+                // searchResults.style.display = 'none';
             }
-
-            fetchTokenData(inputValue);
-
         });
-
-
         // Add a click event listener to the "Search" button
         searchButton.addEventListener('click', function () {
             // Get the value from the input

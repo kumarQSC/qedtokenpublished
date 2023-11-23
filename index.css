@@ -45,7 +45,7 @@
 .container121{
     background-color: #F1F1F9;
     background-size: cover;
-    height:500px;
+    height:300px;
     padding-top: 50px;
     padding-bottom: 150px;
 }
@@ -288,8 +288,8 @@ input::placeholder{
 
 .vvv{
     background-color: #F1F1F9;
-    width: 127px;
-    height: 26px;
+    width: auto;
+    height: 31px;
     border-radius: 19px;
     padding: 3px 12px 3px 12px;
     margin-top: -5px;
@@ -297,8 +297,8 @@ input::placeholder{
 
 .vvv01{
     background-color: #F1F1F9;
-    width: 74px;
-    height: 26px;
+    width: auto;
+    height: 31px;
     border-radius: 19px;
     padding: 3px 12px 3px 12px;
     margin-top: -5px;
