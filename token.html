@@ -95,9 +95,8 @@
                 <div class="container01">
                     <div class="input-box">
                         <i class="fa-solid fa-magnifying-glass"></i>
-                        <input type="text" class="input01" id="searchInput" value="" placeholder="Enter Token ID"
-                            onkeyup="changeColor(this.value)">
-                        <button type="submit" class="button" id="searchButton">Search</button>
+                        <input type="text" class="input01" id="searchInput" value="" placeholder="Enter Token ID" onkeyup="changeColor(this.value)">
+                        <button type="submit" class="button" id="searchButton" >Search</button>
                     </div>
                 </div>
             </div>
@@ -213,10 +212,10 @@
                     <div class="table-container">
                         <table id="tokenHistory01">
                             <tr class="header-row">
-                                <th class="mano01" onclick="sortTable(0,'tokenHistory01')">From&nbsp;&#8645;</th>
-                                <th class="man" onclick="sortTable(1,'tokenHistory01')">To&nbsp;&#8645;</th>
-                                <th onclick="sortTable(2,'tokenHistory01')">Transfer Date&nbsp;&#8645;</th>
-                                <th onclick="sortTable(3,'tokenHistory01')">Transfer Time&nbsp;&#8645;</th>
+                                <th class="mano01">From</th>
+                                <th class="man">To</th>
+                                <th>Transfer Date</th>
+                                <th>Transfer Time</th>
                             </tr>
                             <!-- <tr class="table01">
                                 <td class="mano03">
@@ -266,13 +265,15 @@
             </div>
         </div>
 
-
-        <div class="container368" id="bb02">
-            <div class="container369">
-                <h4 class="tokenavail01">No Tokens Available</h4>
-                <img src="./assets/images/layer08.png" class="layer02">
+        
+            <div class="container368" id="bb02">
+                <div class="container369" id="notokendata01"  style="display: none;">
+                    <h4 class="tokenavail01">No Tokens Available</h4>
+                    <img src="./assets/images/layer08.png" class="layer02">
+                </div>
             </div>
-        </div>
+      
+       
 
 
         <div id="man02" style="display: none">
@@ -373,9 +374,9 @@
                 <div id="transferHistory01" class="tab-content" style="display: none;">
                     <table id="tokenHistory" class="tablecont" style="margin-top: auto;">
                         <tr class="nash">
-                            <th class="from" onclick="sortTable(0,'tokenHistory')">From&nbsp;&#8645;</th>
-                            <th class="to" onclick="sortTable(1,'tokenHistory')">To&nbsp;&#8645;</th>
-                            <th class="transfer-details" >Transfer Details</th>
+                            <th class="from">From</th>
+                            <th class="to">To</th>
+                            <th class="transfer-details">Transfer Details</th>
                         </tr>
                         <!-- <tr class="table36801">
                             <td class="rsa01">
@@ -468,76 +469,8 @@
             };
         }
 
-        function arrow(columnName) {
-            if (this.column === columnName) {
-                return this.isDesc ? '&#8593;' : '&#8595;';
-            }
-            return '';
-        }
-        // Table sort for both columns and both directions.
-        function sortTable(n, tabName) {
-            let table;
-            table = document.getElementById(tabName);
-            let rows,
-                i,
-                x,
-                y,
-                count = 0;
-            let switching = true;
-
-            // Order is set as ascending
-            let direction = 'ascending';
-
-            // Run loop until no switching is needed
-            while (switching) {
-                switching = false;
-                let rows = table.rows;
-
-                //Loop to go through all rows
-                for (i = 1; i < rows.length - 1; i++) {
-                    var Switch = false;
-
-                    // Fetch 2 elements that need to be compared
-                    x = rows[i].getElementsByTagName('TD')[n];
-                    y = rows[i + 1].getElementsByTagName('TD')[n];
-
-                    // Check the direction of order
-                    if (direction == 'ascending') {
-
-                        // Check if 2 rows need to be switched
-                        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-                            // If yes, mark Switch as needed and break loop
-                            Switch = true;
-                            break;
-                        }
-                    } else if (direction == 'descending') {
-                        // Check direction
-                        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-                            // If yes, mark Switch as needed and break loop
-                            Switch = true;
-                            break;
-                        }
-                    }
-                }
-                if (Switch) {
-                    // Function to switch rows and mark switch as completed
-                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-                    switching = true;
-
-                    // Increase count for each switch
-                    count++;
-                } else {
-                    // Run while loop again for descending order
-                    if (count == 0 && direction == 'ascending') {
-                        direction = 'descending';
-                        switching = true;
-                    }
-                }
-            }
-        }
-
         function changeColor(val) {
-
+            
             if (val.trim())
                 searchButton.style.backgroundColor = "#005eff"
             else
@@ -549,6 +482,7 @@
         const searchResults = document.getElementById('searchResults');
         const notoken = document.getElementById('notokenfound')
         const notokendata = document.getElementById('notokendata')
+        const notokendataMobile = document.getElementById('notokendata01')
         const noTokenFoundMobile = document.getElementById('bb02')
 
 
@@ -650,7 +584,6 @@
                                 });
                             }
                         });
-
                         const transferHistoryElement = [
                             "tokenHistory",
                             "tokenHistory01"
@@ -669,6 +602,7 @@
                                     elements.forEach((element) => {
                                         element.style = "text-align:center;";
                                         element.innerHTML = "No Details Found";
+                                        
                                     });
                                 }
                             });
@@ -758,16 +692,12 @@
                         searchResults.style.display = 'none';
                         notoken.style.display = 'block';
                         notokendata.style.display = 'block';
+                        notokendataMobile.style.display="block"
                         searchButton.disabled = false;
                         previousInput = '';
                     }
-
-
                 })
                 .catch(error => console.log('error', error));
-
-
-
         }
 
         const fileAttachmentData = () => {
@@ -790,12 +720,11 @@
             //fetch("http://54.183.209.192:4000/smeasset/listGLobalAttachments", requestOptions)
 
 
-            // live 
-            fetch("https://api.appqedvault.com/smeasset/listGLobalAttachments", requestOptions)
+                // live 
+                 fetch("https://api.appqedvault.com/smeasset/listGLobalAttachments", requestOptions)
                 .then(response => response.json())
                 .then(result => {
                     let fileApi = result?.response?.data
-                    console.log("68876", fileApi.length)
                     const elementGroups = [
                         "pdfAttachment",
                         "fileAttachment"
@@ -859,9 +788,9 @@
                             </tr>`;
                         } else if (groupId === "tokenHistory") {
                             element.innerHTML = `   <tr class="nash">
-                            <th class="from" onclick="sortTable(0,'tokenHistory')">From&nbsp;&#8645;</th>
-                            <th class="to" onclick="sortTable(1,'tokenHistory')">To&nbsp;&#8645;</th>
-                            <th class="transfer-details" onclick="sortTable(2,'tokenHistory')">Transfer Details&nbsp;&#8645;</th>
+                            <th class="from">From</th>
+                            <th class="to">To</th>
+                            <th class="transfer-details">Transfer Details</th>
                         </tr>`;
                         }
                     });
@@ -974,16 +903,19 @@
         searctMegnifi.addEventListener('click', function () {
             var man02 = document.getElementById('man02');
             const b = document.getElementById("bb02");
+
             let searchField = searchInputfieldValue.value
             debounceFetchTokenApi(searchField);
-            console.log("573217", searchInputfieldValue.value)
             b.style.display = "none";
 
 
             if (man02.style.display === 'none') {
                 man02.style.display = 'block';
+                b.style.display = "none";
             } else {
                 man02.style.display = 'none';
+                b.style.display = "block";
+                
             }
         });
 
@@ -1019,3 +951,4 @@
 </body>
 
 </html>
+
