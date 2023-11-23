@@ -212,10 +212,10 @@
                     <div class="table-container">
                         <table id="tokenHistory01">
                             <tr class="header-row">
-                                <th class="mano01">From</th>
-                                <th class="man">To</th>
-                                <th>Transfer Date</th>
-                                <th>Transfer Time</th>
+                                <th class="mano01" onclick="sortTable(0,'tokenHistory01')">From&nbsp;&#8645;</th>
+                                <th class="man" onclick="sortTable(1,'tokenHistory01')">To&nbsp;&#8645;</th>
+                                <th  onclick="sortTable(2,'tokenHistory01')">Transfer Date&nbsp;&#8645;</th>
+                                <th  onclick="sortTable(3,'tokenHistory01')">Transfer Time&nbsp;&#8645;</th>
                             </tr>
                             <!-- <tr class="table01">
                                 <td class="mano03">
@@ -374,9 +374,9 @@
                 <div id="transferHistory01" class="tab-content" style="display: none;">
                     <table id="tokenHistory" class="tablecont" style="margin-top: auto;">
                         <tr class="nash">
-                            <th class="from">From</th>
-                            <th class="to">To</th>
-                            <th class="transfer-details">Transfer Details</th>
+                            <th class="from" onclick="sortTable(0,'tokenHistory')">From&nbsp;&#8645;</th>
+                            <th class="to" onclick="sortTable(1,'tokenHistory')">To&nbsp;&#8645;</th>
+                            <th class="transfer-details" onclick="sortTable(2,'tokenHistory')">Token Details&nbsp;&#8645;</th>
                         </tr>
                         <!-- <tr class="table36801">
                             <td class="rsa01">
@@ -468,6 +468,70 @@
                 timer = setTimeout(() => { func.apply(this, args); }, timeout);
             };
         }
+
+
+        // Table sort for both columns and both directions.
+        function sortTable(n, tabName) {
+            let table;
+            table = document.getElementById(tabName);
+            let rows,
+                i,
+                x,
+                y,
+                count = 0;
+            let switching = true;
+
+            // Order is set as ascending
+            let direction = 'ascending';
+
+            // Run loop until no switching is needed
+            while (switching) {
+                switching = false;
+                let rows = table.rows;
+
+                //Loop to go through all rows
+                for (i = 1; i < rows.length - 1; i++) {
+                    var Switch = false;
+
+                    // Fetch 2 elements that need to be compared
+                    x = rows[i].getElementsByTagName('TD')[n];
+                    y = rows[i + 1].getElementsByTagName('TD')[n];
+
+                    // Check the direction of order
+                    if (direction == 'ascending') {
+
+                        // Check if 2 rows need to be switched
+                        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                            // If yes, mark Switch as needed and break loop
+                            Switch = true;
+                            break;
+                        }
+                    } else if (direction == 'descending') {
+                        // Check direction
+                        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                            // If yes, mark Switch as needed and break loop
+                            Switch = true;
+                            break;
+                        }
+                    }
+                }
+                if (Switch) {
+                    // Function to switch rows and mark switch as completed
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+
+                    // Increase count for each switch
+                    count++;
+                } else {
+                    // Run while loop again for descending order
+                    if (count == 0 && direction == 'ascending') {
+                        direction = 'descending';
+                        switching = true;
+                    }
+                }
+            }
+        }
+
 
         function changeColor(val) {
             
@@ -788,9 +852,9 @@
                             </tr>`;
                         } else if (groupId === "tokenHistory") {
                             element.innerHTML = `   <tr class="nash">
-                            <th class="from">From</th>
-                            <th class="to">To</th>
-                            <th class="transfer-details">Transfer Details</th>
+                            <th class="from" onclick="sortTable(0,'tokenHistory')">From&nbsp;&#8645;</th>
+                            <th class="to" onclick="sortTable(0,'tokenHistory')">To&nbsp;&#8645;</th>
+                            <th class="transfer-details" onclick="sortTable(0,'tokenHistory')">Transfer Details&nbsp;&#8645;</th>
                         </tr>`;
                         }
                     });
