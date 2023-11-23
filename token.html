@@ -459,6 +459,13 @@
 
     <script>
 
+        const debounce = (func, timeout = 500) => {
+            let timer;
+            return (...args) => {
+                clearTimeout(timer);
+                timer = setTimeout(() => { func.apply(this, args); }, timeout);
+            };
+        }
 
         // Get references to the elements
         const searchInput = document.getElementById('searchInput');
@@ -466,15 +473,19 @@
         const searchResults = document.getElementById('searchResults');
         const notoken = document.getElementById('notokenfound')
         const notokendata = document.getElementById('notokendata')
-        
+        const noTokenFoundMobile = document.getElementById('bb02')
 
 
+        let debounceFetchTokenApi = debounce((inputValue) => fetchTokenData(inputValue));
 
         searchResults.style.display = 'none';
         notoken.style.display = 'block';
         let itemIndex;
+        let previousInput = '';
         const fetchTokenData = (inputToken) => {
+            if (previousInput == inputToken) return;
             resetFileAttachments();
+
             var myHeaders = new Headers();
             myHeaders.append("Content-Type", "application/json");
 
@@ -490,8 +501,8 @@
             searchButton.disabled = true;
             // development
             fetch("http://54.183.209.192:4000/smeasset/getGlobalSMEAssetDetails", requestOptions)
-        // live 
-            // fetch("https://api.appqedvault.com/smeasset/getGlobalSMEAssetDetails", requestOptions)
+                // live 
+                // fetch("https://api.appqedvault.com/smeasset/getGlobalSMEAssetDetails", requestOptions)
                 .then(response => response.json())
                 .then(result => {
                     console.log("ewywiuyri", result?.status)
@@ -573,7 +584,7 @@
                             "tokenHistory01",
                             "transferHistory01"
                         ];
-                        let transferData = "";
+                        let transferDataForWeb, transferDataForMobile = "";
                         const setNoDataFound = () => {
                             transferHistoryNoRecordElement.forEach((groupId) => {
                                 const elements = document.querySelectorAll(`#${groupId}`);
@@ -590,7 +601,7 @@
                         !isNullOrEmptyNew(apiData?.transferHistory) ? apiData?.transferHistory.map((item) => {
                             console.log("moye moye", item);
 
-                            transferData = `<tr class="table01">
+                            transferDataForWeb = `<tr class="table01">
                                                 <td class="mano03">
 
                                                     <div class="a123">
@@ -618,31 +629,63 @@
                                                     </div>
                                                 </td>
                                                 <td id="tranferDate" class="ta01">
-                                                    ${moment(item?.tranferDate).format("DD-MMMM-YYYY")}</td>
+                                                    ${moment(item?.tranferDate).format("DD-MMM-YYYY")}</td>
                                                 <td id="transferDateOnly" class="ta01">${moment(item?.tranferDate).format("HH:MM a")}</td>
                                             </tr>
                                             `;
+                            transferDataForMobile = `<tr class="table36801">
+                                            <td class="rsa01">
 
+                                                <div class="world">
+                                                    <div>
+                                                        <p class="ind01">${item?.fromName}</p>
+                                                        <div class="dummy-bg">
+                                                            <p class="ind02">${item?.fromType}</p>
+                                                        </div>
+                                                    </div>
+                                                    <img src="./assets/images/ar.png" class="ar01">
+                                                </div>
+                                            </td>
+
+                                            <td class="rsa02">
+                                                <p class="ind01">${item?.toName}</p>
+                                                <div class="dummy-bg01">
+                                                    <p class="ind02">${item?.toType}</p>
+                                                </div>
+                                            </td>
+                                            <td class="rsa03">
+                                                <p class="ind01"> ${moment(item?.tranferDate).format("DD-MMM-YYYY")}</p>
+                                                <p class="ind01">${moment(item?.tranferDate).format("HH:MM a")}</p>
+
+                                            </td>
+                                        </tr>`;
                             transferHistoryElement.forEach((groupId) => {
                                 const elements = document.querySelectorAll(`#${groupId}`);
 
                                 if (elements.length > 0) {
                                     elements.forEach((element) => {
-                                        element.innerHTML += transferData;
+                                        if (groupId === "tokenHistory01") {
+                                            element.innerHTML += transferDataForWeb;
+                                        } if (groupId === "tokenHistory") {
+                                            element.innerHTML += transferDataForMobile;
+                                        }
                                     });
                                 }
                             });
                         }) : setNoDataFound()
 
-                        fileAttachmentData()
+                        fileAttachmentData();
+                        previousInput = inputToken;
                     }
                     else {
+                        noTokenFoundMobile.style.display = 'block';
                         searchResults.style.display = 'none';
                         notoken.style.display = 'block';
                         notokendata.style.display = 'block';
                         searchButton.disabled = false;
+                        previousInput = '';
                     }
-                    
+
 
                 })
                 .catch(error => console.log('error', error));
@@ -667,12 +710,12 @@
                 body: raw,
                 redirect: 'follow'
             };
-   // development
+            // development
             fetch("http://54.183.209.192:4000/smeasset/listGLobalAttachments", requestOptions)
 
-                     
-        // live 
-            // fetch("https://api.appqedvault.com/smeasset/listGLobalAttachments", requestOptions)
+
+                // live 
+                // fetch("https://api.appqedvault.com/smeasset/listGLobalAttachments", requestOptions)
                 .then(response => response.json())
                 .then(result => {
                     let fileApi = result?.response?.data
@@ -753,9 +796,6 @@
         searchButton.addEventListener('click', function () {
             // Get the value from the input
             const inputValue = searchInput.value;
-
-
-
             // Check if the input is not empty
             if (inputValue.trim() !== '') {
                 // Change the styles of the input-box
@@ -767,12 +807,11 @@
                 searchButton.style.backgroundColor = '#005DFF';
                 searchButton.style.color = '#fff';
 
-                
+
 
                 // Show the search results content
                 //searchResults.style.display = 'block';
-
-                fetchTokenData(inputValue);
+                debounceFetchTokenApi(inputValue);
             } else {
                 // If the input is empty, disable the search button
                 searchButton.disabled = false;
@@ -780,7 +819,7 @@
                 // Optionally, you can also reset styles or handle other actions here
                 searchInput.style.border = '1px solid #ccc';
                 searchInput.style.borderColor = '#ccc';
-                
+
                 searchButton.style.backgroundColor = '#ccc';
                 searchButton.style.color = '#000';
 
@@ -860,7 +899,7 @@
             var man02 = document.getElementById('man02');
             const b = document.getElementById("bb02");
             let searchField = searchInputfieldValue.value
-            fetchTokenData(searchField)
+            debounceFetchTokenApi(searchField);
             console.log("573217", searchInputfieldValue.value)
             b.style.display = "none";
 

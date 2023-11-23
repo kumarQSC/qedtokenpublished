@@ -935,7 +935,7 @@ th:last-child {
 
       .dummy-bg{
         background-color: #F1F1F9;
-        width: 62px;
+        width: auto;
         height: 20px;
         padding: 2px 12px 2px 12px;
         border-radius: 19px;
@@ -944,7 +944,7 @@ th:last-child {
 
     .dummy-bg01{
         background-color: #F1F1F9;
-        width: 99px;
+        width: auto;
         height: 20px;
         padding: 2px 12px 2px 12px;
         border-radius: 19px;
